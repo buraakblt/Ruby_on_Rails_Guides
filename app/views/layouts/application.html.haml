@@ -1,0 +1,29 @@
+!!!
+%html
+  %head
+    %title Blog2
+    = csrf_meta_tags
+    = csp_meta_tag
+
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    
+  %body
+    %nav#navbar-example2.navbar.navbar-dark.bg-dark
+      %a.navbar-brand{:href => "#"} Burak Bulut
+      %ul.nav.nav-pills
+        %li.nav-item
+          %a.nav-link{:href => welcome_index_path} Home
+        %li.nav-item
+          %a.nav-link{:href => articles_path} Articles
+        %li.nav-item.dropdown
+          %a.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"} Dropdown
+          .dropdown-menu
+            %a.dropdown-item{:href => "#one"} one
+            %a.dropdown-item{:href => "#two"} two
+            .dropdown-divider{:role => "separator"}
+            %a.dropdown-item{:href => "#three"} three
+
+            
+    .container 
+      = yield

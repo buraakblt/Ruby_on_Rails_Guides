@@ -1,0 +1,25 @@
+.container
+    .row 
+        .col
+            .card.card_details
+                %img{src: "/backround_image.png",style: "width:100%",class:""}
+                .card-header 
+                    %h3.text-center Welcome To My Blog
+                .card-body
+                    %h4.center
+                        Article Library 
+                    %p.center
+                        Interesting, informative articles that you will not see everywhere... 
+                    .row.justify-content-center
+                        .col-auto
+                            = link_to "Take look" ,articles_path , class:"btn btn-primary center-button"
+:css 
+    .center{
+        text-align:center;
+    }
+    .card_details {
+        margin: 0 auto; /* Added */
+        float: none; /* Added */
+        margin-bottom: 10px; /* Added */
+        width: 75%;
+    }
