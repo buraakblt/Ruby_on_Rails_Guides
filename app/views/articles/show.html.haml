@@ -1,0 +1,33 @@
+.container
+  %h2 Article
+  #accordionFlushExample.accordion
+    .accordion-item
+      %h2#flush-headingOne.accordion-header
+        %button.accordion-button.collapsed{"aria-controls" => "flush-collapseOne", "aria-expanded" => "false", "data-bs-target" => "#flush-collapseOne", "data-bs-toggle" => "collapse", :type => "button"}
+          = @article.title
+      #flush-collapseOne.accordion-collapse.collapse{"aria-labelledby" => "flush-headingOne", "data-bs-parent" => "#accordionFlushExample"}
+        .accordion-body
+          = @article.text
+  %h2 Comments
+  %table.table.table-hover
+    %thead
+      %tr
+        %th #
+        %th Commenter
+        %th Comment
+        %th{:colspan => "1"}
+    - @article.comments.each do |comment |
+      %tbody
+        %tr
+          %td= comment.id
+          %td= comment.commenter
+          %td= comment.body
+          %td= link_to 'Destroy Comment', [comment.article, comment], class: "btn btn-danger btn-sm",
+                method: :delete,
+                data: { confirm: 'Are you sure?' }
+          
+  %h3 Add a comment:
+  = render 'comments/form'
+  = link_to 'Edit', edit_article_path(@article), class:"btn btn-warning btn-sm"
+  = link_to 'Back', articles_path, class:"btn btn-secondary btn-sm"
+

@@ -1,0 +1,34 @@
+.container
+  %br/
+  %br/
+  %h1.center Listing Articles
+  = link_to 'New article', new_article_path, class:"btn btn-primary btn-sm"
+  %br/
+  %br/
+  %table.table.table-responsive.table-hover
+    %thead
+      %tr
+        %th #
+        %th Title
+        %th Text
+        %th{:colspan => "3"}
+    - @articles.each do |article|
+      %tbody
+        %tr
+          %td= article.id
+          %td= article.title
+          %td
+            = article.text[0..4]
+            \...
+          %td= link_to 'Show', article_path(article), class:"btn btn-info btn-sm"
+          %td= link_to 'Edit', edit_article_path(article), class:"btn btn-warning btn-sm"
+          %td= link_to 'Destroy', article_path(article), class:"btn btn-danger btn-sm", |
+              method: :delete,                                                         |
+              data: { confirm: 'Are you sure?' }                                       |
+  %br/
+  = link_to 'Back', welcome_index_path, class:"btn btn-secondary btn-sm"
+
+:css 
+    .center{
+        text-align:center;
+    }
