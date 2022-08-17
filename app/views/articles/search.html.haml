@@ -2,16 +2,23 @@
     %br/
     %br/
     %h1.center Search Results
-    %table.table.table-responsive.table-hover
-        %thead
-            %tr
-                %th #
-                %th Title
-                %th Text
-                %th{:colspan => "3"}
-        - if @articles.empty?
-            %h2.center There is no article containing this
-        - else
+    - if @articles.empty?
+        %br/
+        %p.center{ :style => "font-size: 120%"}
+            %i  
+                There is no article containing this: "#{params[:q]}"
+    - else
+        %br/
+        %p.center{ :style => "font-size: 120%"}
+            %i  
+                = pluralize(@articles.count, "Result")
+        %table.table.table-responsive.table-hover
+            %thead
+                %tr
+                    %th #
+                    %th Title
+                    %th Text
+                    %th{:colspan => "3"}
             - @articles.each do |article|  
                 %tbody
                     %tr

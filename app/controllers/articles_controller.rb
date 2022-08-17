@@ -1,13 +1,18 @@
 class ArticlesController < ApplicationController
+    before_action :set_search
 
     http_basic_authenticate_with name: "buraakblt", password: "123456", except: [:index, :show]
    
     def index
-        @articles = Article.all
+        @articles = @q.result(distinct: true)
+    end
+
+    def set_search
+        @q = Article.ransack(params[:q])
     end
 
     def search
-        @articles = Article.where("title OR text or id LIKE ?", "%" + params[:q] + "%")
+        @articles = Article.where("title LIKE ? OR text LIKE ? OR id LIKE ?", "%" + params[:q] + "%", "%" + params[:q] + "%", "%" + params[:q] + "%")
     end
 
     def show
