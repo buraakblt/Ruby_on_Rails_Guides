@@ -1,5 +1,6 @@
 .container
   %h2 Article
+  %h5= pluralize(@article.views, "view")
   #accordionFlushExample.accordion
     .accordion-item
       %h2#flush-headingOne.accordion-header

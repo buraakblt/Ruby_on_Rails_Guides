@@ -1,0 +1,18 @@
+- if current_user
+    %li.nav-item.dropdown
+        %a.nav-link.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", :href => "#", :type => "button"}
+            = "@#{current_user.name}"
+        %ul.dropdown-menu
+            %li
+                %a.dropdown-item{:href => new_article_path} New Article
+            %li
+                = link_to "Edit Account", edit_user_registration_path, class: "dropdown-item"
+            %li
+                %hr.dropdown-divider/
+            %li
+                = button_to "Sign out", destroy_user_session_path, method: :delete, class: "dropdown-item"
+- else 
+    %li.nav-item
+        %a.nav-link{:href => new_user_registration_path} Sign Up
+    %li.nav-item
+        %a.nav-link{:href => new_user_session_path} Login

@@ -1,14 +1,9 @@
 class ArticlesController < ApplicationController
-    before_action :set_search
-
-    http_basic_authenticate_with name: "buraakblt", password: "123456", except: [:index, :show]
+    before_action :authenticate_user!, except: %i[search show index]
    
     def index
-        @articles = @q.result(distinct: true)
-    end
-
-    def set_search
         @q = Article.ransack(params[:q])
+        @articles = @q.result(distinct: true)
     end
 
     def search
@@ -17,6 +12,9 @@ class ArticlesController < ApplicationController
 
     def show
         @article = Article.find(params[:id])
+        views = @article.views + 1
+        @article.views = views
+        @article.save
     end
 
     def new
@@ -29,6 +27,7 @@ class ArticlesController < ApplicationController
 
     def create
         @article = Article.new(article_params)
+        @article.user = current_user
  
         if @article.save
           redirect_to @article
