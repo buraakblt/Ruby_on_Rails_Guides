@@ -5,13 +5,20 @@ class CommentsController < ApplicationController
         @article = Article.find(params[:article_id])
         @comment = @article.comments.create(comment_params)
         redirect_to article_path(@article)
+        flash[:notice] = "Comment added successfully."
     end
 
     def destroy
         @article = Article.find(params[:article_id])
         @comment = @article.comments.find(params[:id])
-        @comment.destroy
-        redirect_to article_path(@article)
+        if @article.user == current_user
+          @comment.destroy
+          redirect_to request.referrer
+          flash[:notice] = "Comment deleted successfully."
+        else
+          redirect_to request.referrer
+          flash[:alert] = "Only the writer of the article has the authority to delete comments."
+        end
     end
      
       private

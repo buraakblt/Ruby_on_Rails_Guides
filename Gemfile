@@ -40,6 +40,9 @@ gem 'bootstrap', '~> 5.2.0'
 gem 'ransack'
 gem 'faker'
 gem 'devise'
+gem 'webpacker'
+gem 'actiontext',github:'kobaltz/actiontext',branch:'archive',require:'action_text'
+gem 'image_processing'
 
 
 group :development, :test do

@@ -1,7 +1,7 @@
 !!!
 %html
   %head
-    %title Blog2
+    %title Articles
     = csrf_meta_tags
     = csp_meta_tag
 
@@ -12,6 +12,7 @@
     %script{:crossorigin => "anonymous", :integrity => "sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa", :src => "https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"}
     %script{:crossorigin => "anonymous", :integrity => "sha512-6UofPqm0QupIL0kzS/UIzekR73/luZdC6i/kXDbWnLOJoqwklBK6519iUnShaYceJ0y4FaiPtX/hRnV/X/xlUQ==", :referrerpolicy => "no-referrer", :src => "https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"}
 
+    = render 'layouts/tiny'
 
   %body
     = render 'layouts/navbar'

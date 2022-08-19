@@ -22,7 +22,7 @@
         %tr
           %td= comment.id
           %td= comment.commenter
-          %td= comment.body
+          %td= comment.body.html_safe 
           %td= link_to 'Destroy Comment', [comment.article, comment], class: "btn btn-danger btn-sm",
                 method: :delete,
                 data: { confirm: 'Are you sure?' }

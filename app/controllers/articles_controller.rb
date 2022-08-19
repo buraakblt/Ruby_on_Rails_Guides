@@ -23,6 +23,11 @@ class ArticlesController < ApplicationController
 
     def edit
         @article = Article.find(params[:id])
+        if @article.user == current_user
+        else
+            redirect_to request.referrer
+            flash[:alert] = "Only the writer of the article has the authority to edit."
+        end
     end
 
     def create
@@ -31,6 +36,7 @@ class ArticlesController < ApplicationController
  
         if @article.save
           redirect_to @article
+          flash[:notice] = "Article created successfully by @#{@article.user.name}."
         else
           render 'new'
         end
@@ -41,6 +47,7 @@ class ArticlesController < ApplicationController
        
         if @article.update(article_params)
           redirect_to @article
+          flash[:notice] = "Article updated successfully by @#{@article.user.name}."
         else
           render 'edit'
         end
@@ -48,9 +55,14 @@ class ArticlesController < ApplicationController
 
     def destroy
         @article = Article.find(params[:id])
-        @article.destroy
-     
-        redirect_to articles_path
+        if @article.user == current_user
+            @article.destroy
+            redirect_to request.referrer
+            flash[:notice] = "Article deleted successfully."
+        else
+            redirect_to request.referrer
+            flash[:alert] = "Only the writer of the article has the authority to delete."
+        end
     end
 
     private
